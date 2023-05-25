@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshmi Haneesha</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            max-width: 1280px;
+            margin-bottom: 20px;
+        }
+
+        .scroll-button {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .scroll-down-button {
+            right: 20px;
+        }
+
+        .scroll-up-button {
+            right: 20px;
+            bottom: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src='./1.jpg' />
+    <img src='./2.jpg' />
+    <img src='./3.jpg' />
+    <img src='./4.jpg' />
+    <img src='./5.jpg' />
+    <img src='./6.jpg' />
+    <img src='./7.jpg' />
+    <img src='./8.jpg' />
+    <img src='./9.jpg' />
+    <img src='./10.jpg' />
+    <img src='./11.jpg' />
+    <img src='./12.jpg' />
+    <img src='./13.jpg' />
+    <img src='./14.jpg' />
+    <img src='./15.jpg' />
+    <img src='./16.jpg' />
+    <img src='./17.jpg' />
+    <img src='./18.jpg' />
+
+    <div class="scroll-button scroll-down-button" onclick="scrollToNext()">
+        &#8681;
+    </div>
+
+    <div class="scroll-button scroll-up-button" onclick="scrollToPrevious()">
+        &#8679;
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('img');
+        let currentIndex = 0;
+        const scrollButtons = document.querySelectorAll('.scroll-button');
+
+        function scrollToNext() {
+            currentIndex++;
+            if (currentIndex < images.length) {
+                const nextImage = images[currentIndex];
+                const rect = nextImage.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const targetPosition = rect.top + scrollTop - 50; // Adjust scroll position as needed
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            }
+        }
+
+        function scrollToPrevious() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                const previousImage = images[currentIndex];
+                const rect = previousImage.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const targetPosition = rect.top + scrollTop - 50; // Adjust scroll position as needed
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            }
+        }
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 100) {
+                scrollButtons.forEach(button => {
+                    button.style.display = 'block';
+                });
+            } else {
+                scrollButtons.forEach(button => {
+                    button.style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
